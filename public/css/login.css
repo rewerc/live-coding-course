@@ -1,0 +1,12 @@
+.login-box {
+    margin-top: 30vh;
+    width: 40%;
+    background-color: whitesmoke;
+    border-radius: 1.5rem;
+}
+
+.error-box {
+    height: 2rem;
+    font-size: 10pt;
+    color: red;
+}

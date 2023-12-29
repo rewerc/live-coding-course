@@ -1,0 +1,55 @@
+<%- include("components/head", {
+    title: "Login", 
+    css: "login"
+}) %>
+
+<form method="POST" action="/login">
+    <div class="container-sm login-box p-5">
+    
+        <div class="row mb-4">
+    
+            <div class="col-12 text-center">
+                LOGIN
+            </div>
+    
+        </div>
+    
+        <div class="row mb-3">
+    
+            <div class="col-3 my-auto">Email</div>
+            <div class="col-9">
+                <input type="email" id="email" name="email" class="w-100 form-control">
+            </div>
+    
+        </div>
+    
+        <div class="row">
+    
+            <div class="col-3 my-auto">Password</div>
+            <div class="col-9">
+                <input type="password" id="password" name="password" class="w-100 form-control">
+            </div>
+    
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-12 text-center error-box">
+                <%= error ? "Incorrect email address or password." : "" %>
+            </div>
+        </div>
+    
+        <div class="row">
+    
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" id="login" type="submit">Login</button>
+            </div>
+    
+        </div>
+    
+    </div>
+</form>
+
+<%- include("components/body", {
+    script: "login",
+    settings: {}
+}) %>

@@ -1,0 +1,58 @@
+<%- include("components/head", {
+    title: "Sign Up", 
+    css: "signup"
+}) %>
+
+<form method="POST" action="/signup">
+    <div class="container-sm signup-box p-5">
+    
+        <div class="row mb-4">
+    
+            <div class="col-12 text-center">
+                REGISTER
+            </div>
+    
+        </div>
+    
+        <div class="row mb-3">
+    
+            <div class="col-3 my-auto">Username</div>
+            <div class="col-9">
+                <input type="text" id="username" name="username" class="w-100 form-control">
+            </div>
+    
+        </div>
+    
+        <div class="row mb-3">
+    
+            <div class="col-3 my-auto">Email</div>
+            <div class="col-9">
+                <input type="email" id="email" name="email" class="w-100 form-control">
+            </div>
+    
+        </div>
+    
+        <div class="row mb-5">
+    
+            <div class="col-3 my-auto">Password</div>
+            <div class="col-9">
+                <input type="password" id="password" name="password" class="w-100 form-control">
+            </div>
+    
+        </div>
+    
+        <div class="row">
+    
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" id="signup" type="submit">Sign Up</button>
+            </div>
+    
+        </div>
+    
+    </div>
+</form>
+
+<%- include("components/body", {
+    script: "signup",
+    settings: {}
+}) %>

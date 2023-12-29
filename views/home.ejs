@@ -1,0 +1,194 @@
+<%- include("components/head", {
+    title: "Home", 
+    css: "home"
+}) %>
+    
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Real-time Course</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Appointments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Personal</a>
+                </li> -->
+            </ul>
+            <div class="navbar-text d-flex flex-col align-items-center">
+                <div class="me-4">
+                    <div class="dropdown">
+                        <button id="notificationButton" class="btn btn-dark bg-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end overflow-y-auto p-2" style="width: 400px; height: 300px">
+                            <div class="container-fluid" id="notificationContainer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="me-4">
+                    <button type="button" class="btn btn-primary" id="createCourseModalTrigger">
+                        <i class="fa-solid fa-plus"></i> Course
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        <%= user %>
+                    </div>
+                    <div>
+                        <%= email %>
+                    </div>
+                </div>
+
+                <form method="POST" action="/logout" class="ms-3">
+                    <button class="btn btn-link" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid mt-2">
+    <div class="row mt-3">
+        <div class="col-12 mb-2 d-flex justify-content-between align-items-center flex-col">
+            <div class="fs-5">
+                Booked Courses
+            </div>
+            <div>
+                <button id="reload-booked" class="btn btn-light rounded-circle fs-6" type="button" style="width: 50px; height:50px">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div id="booked-courses" class="col-12 py-2 overflow-x-auto text-nowrap">
+            
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 d-flex flex-col justify-content-between align-items-center">
+            <div class="fs-5">
+                Recommended Courses
+            </div>
+            <div>
+                <button id="reload-recommended" class="btn btn-light rounded-circle fs-6" type="button" style="width: 50px; height:50px">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="recommended-courses">
+        
+    </div>
+</div>
+
+<div class="modal modal-xl fade" id="createCourseModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-3">
+                            Title
+                        </div>
+                        <div class="col-9">
+                            <input type="text" class="new-course-title form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-3">
+                            Description
+                        </div>
+                        <div class="col-9">
+                            <textarea rows="3" class="new-course-description form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            Content
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 5%">#</th>
+                                        <th scope="col" style="width: 20%">Name</th>
+                                        <th scope="col" style="width: 50%">Description</th>
+                                        <th scope="col" style="width: 25%">Duration (minutes)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="current-course-content">
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td><input class="form-control form-control-sm" type="text"></td>
+                                        <td><textarea class="form-control form-control-sm" rows="1"></textarea></td>
+                                        <td><input class="form-control form-control-sm" type="number"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12">
+                            <button id="add-row-content" type="button" class="btn btn-sm btn-primary">Add row</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="createCourse">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="courseDetails" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseDetailsLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="courseDetailsContent"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="bookDialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookDialogLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="bookDialogContent"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="bookCourse">Book</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include("components/body", {
+    script: "home",
+    settings: {
+        textEditor: true,
+        webrtc: true,
+        websocket: true
+    }
+}) %>

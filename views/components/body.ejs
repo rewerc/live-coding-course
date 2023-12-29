@@ -1,0 +1,15 @@
+    <script type="text/javascript" src="files/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="files/jquery/dist/jquery.min.js"></script>
+    <% if (settings.websocket) { %>
+        <script type="text/javascript" src="files/js/websocket.js"></script>
+    <% } %>
+    <% if (settings.textEditor) { %>
+        <script type="text/javascript" src="files/js/textEditor.js"></script>
+    <% } %>
+    <% if (settings.webrtc) { %>
+        <script type="text/javascript" src="files/js/webrtc.js"></script>
+    <% } %>
+    <script type="text/javascript" src="files/js/utils.js"></script>
+    <script type="text/javascript" src="files/js/<%= script %>.js"></script>
+</body>
+</html>
